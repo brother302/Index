@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Result Entry Form</title>
+    <style>
+        /* CSS styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        input, select, textarea {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .form-group input[type="date"], 
+        .form-group input[type="number"] {
+            width: calc(100% - 22px);
+        }
+        .button-group {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .hide-row-button {
+            background-color: #dc3545;
+            color: #fff;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+        .hide-row-button:hover {
+            background-color: #c82333;
+        }
+        table {
+            width: 100%;
+            margin-bottom: 20px;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+        .profile-section, .test-section {
+            margin-bottom: 20px;
+        }
+        .profile-section h2, .test-section h2 {
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+            color: #333;
+            font-size: 20px;
+        }
+        .custom-doctor-container {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .custom-doctor-container input {
+            width: calc(100% - 120px);
+            margin-right: 10px;
+        }
+        .custom-doctor-container button {
+            width: 100px;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+        .dropdown .search-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .dropdown .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            width: 100%;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .dropdown .dropdown-content select {
+            width: 100%;
+            border: none;
+            box-shadow: none;
+            background-color: #fff;
+        }
+        .dropdown .dropdown-content select option {
+            padding: 10px;
+        }
+        .dropdown .dropdown-content select option:hover {
+            background-color: #f4f4f4;
+        }
+        @media (max-width: 768px) {
+            .custom-doctor-container {
+                flex-direction: column;
+            }
+            .custom-doctor-container input {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            .custom-doctor-container button {
+                width: 100%;
+            }
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Test Result Entry Form</h1>
+    
+    <form id="testForm" action="your-backend-url" method="POST">
+        <!-- Patient Profile Section -->
+        <div class="profile-section">
+            <h2>Patient Profile</h2>
+            <div class="form-group">
+                <label for="patientId">Patient ID</label>
+                <input type="text" id="patientId" name="patientId" required>
+            </div>
+            <div class="form-group">
+                <label for="specimen">Specimen</label>
+                <input type="text" id="specimen" name="specimen" required>
+            </div>
+            <div class="form-group">
+                <label for="patientName">Patient Name</label>
+                <input type="text" id="patientName" name="patientName" required>
+            </div>
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" id="age" name="age" required>
+            </div>
+            <div class="form-group">
+                <label for="sex">Sex</label>
+                <select id="sex" name="sex" required>
+                    <option value="">Select Sex</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email">
+            </div>
+            <div class="form-group">
+                <label for="referredBy">Referred by</label>
+                <div class="dropdown">
+                    <select id="referredBy" name="entry.909761135" required>
+                        <!-- Options will be populated by JavaScript -->
+                    </select>
+                    <button type="button" class="hide-row-button" onclick="removeDoctor()">Remove Doctor</button>
+                </div>
+                <div class="custom-doctor-container">
+                    <input type="text" id="customDoctor" placeholder="Enter custom doctor name">
+                    <button type="button" onclick="addCustomDoctor()">Add Custom Doctor</button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="specimenCollectionDate">Specimen Collection Date</label>
+                <input type="date" id="specimenCollectionDate" name="specimenCollectionDate" required>
+            </div>
+            <div class="form-group">
+                <label for="reportDate">Report Date</label>
+                <input type="date" id="reportDate" name="reportDate" required>
+            </div>
+        </div>
+
+        <!-- Test Results Section -->
+        <div class="test-section">
+            <h2>Test Results</h2>
+            <table id="testTable">
+                <thead>
+                    <tr>
+                        <th>Test Name</th>
+                        <th>Test Result</th>
+                        <th>Unit of Value</th>
+                        <th>Reference Value</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Test rows -->
+                    <tr class="hidden">
+                        <td>
+                            <div class="dropdown">
+                                <input type="text" class="search-input" placeholder="Search for a test" onfocus="showDropdown(this)" onkeyup="filterTests(this)" onchange="handleChange(this)">
+                                <div class="dropdown-content">
+                                    <select name="entry.1732470923" onchange="selectTest(this)" required>
+                                        <option value="">Select a test</option>
+                                        <option value="Blood Glucose" data-unit="mg/dL" data-reference="70-99">Blood Glucose</option>
+                                        <option value="Cholesterol" data-unit="mg/dL" data-reference="<200">Cholesterol</option>
+                                        <option value="Hemoglobin" data-unit="g/dL" data-reference="13.8-17.2">Hemoglobin</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <input type="text" name="entry.722633057" required>
+                        </td>
+                        <td>
+                            <input type="text" name="entry.1526332017" readonly required>
+                        </td>
+                        <td>
+                            <input type="text" name="entry.1582360212" readonly required>
+                        </td>
+                        <td>
+                            <button type="button" class="hide-row-button" onclick="hideRow(this)">Hide Row</button>
+                        </td>
+                    </tr>
+                    <tr class="hidden">
+                        <td>
+                            <div class="dropdown">
+                                <input type="text" class="search-input" placeholder="Search for a test" onfocus="showDropdown(this)" onkeyup="filterTests(this)" onchange="handleChange(this)">
+                                <div class="dropdown-content">
+                                    <select name="entry.174637198" onchange="selectTest(this)" required>
+                                        <option value="">Select a test</option>
+                                        <option value="Blood Glucose" data-unit="mg/dL" data-reference="70-99">Blood Glucose</option>
+                                        <option value="Cholesterol" data-unit="mg/dL" data-reference="<200">Cholesterol</option>
+                                        <option value="Hemoglobin" data-unit="g/dL" data-reference="13.8-17.2">Hemoglobin</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <input type="text" name="entry.2039199009" required>
+                        </td>
+                        <td>
+                            <input type="text" name="entry.647900966" readonly required>
+                        </td>
+                        <td>
+                            <input type="text" name="entry.436219649" readonly required>
+                        </td>
+                        <td>
+                            <button type="button" class="hide-row-button" onclick="hideRow(this)">Hide Row</button>
+                        </td>
+                    </tr>
+                    <tr class="hidden">
+                        <td>
+                            <div class="dropdown">
+                                <input type="text" class="search-input" placeholder="Search for a test" onfocus="showDropdown(this)" onkeyup="filterTests(this)" onchange="handleChange(this)">
+                                <div class="dropdown-content">
+                                    <select name="entry.1703497579" onchange="selectTest(this)" required>
+                                        <option value="">Select a test</option>
+                                        <option value="Blood Glucose" data-unit="mg/dL" data-reference="70-99">Blood Glucose</option>
+                                        <option value="Cholesterol" data-unit="mg/dL" data-reference="<200">Cholesterol</option>
+                                        <option value="Hemoglobin" data-unit="g/dL" data-reference="13.8-17.2">Hemoglobin</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <input type="text" name="entry.466745736" required>
+                        </td>
+                        <td>
+                            <input type="text" name="entry.2127723085" readonly required>
+                        </td>
+                        <td>
+                            <input type="text" name="entry.1212450295" readonly required>
+                        </td>
+                        <td>
+                            <button type="button" class="hide-row-button" onclick="hideRow(this)">Hide Row</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="button-group">
+                <button type="button" onclick="unhideRow()">Show Next Row</button>
+            </div>
+        </div>
+
+        <!-- Additional Notes Section -->
+        <div class="form-group">
+            <label for="additionalNotes">Additional Notes</label>
+            <textarea id="additionalNotes" name="additionalNotes" rows="4"></textarea>
+        </div>
+    </form>
+
+    <script>
+        let currentRowIndex = 0;
+
+        function loadDoctors() {
+            return JSON.parse(localStorage.getItem('doctors')) || [];
+        }
+
+        function saveDoctors(doctors) {
+            localStorage.setItem('doctors', JSON.stringify(doctors));
+        }
+
+        function populateDoctorList() {
+            const select = document.getElementById('referredBy');
+            select.innerHTML = '<option value="">Select a doctor</option>';
+            const doctors = loadDoctors();
+            doctors.forEach(doctor => {
+                const option = document.createElement('option');
+                option.value = doctor;
+                option.textContent = doctor;
+                select.appendChild(option);
+            });
+        }
+
+        function addCustomDoctor() {
+            const customDoctorInput = document.getElementById('customDoctor');
+            const doctorName = customDoctorInput.value.trim();
+            if (doctorName) {
+                const doctors = loadDoctors();
+                if (!doctors.includes(doctorName)) {
+                    doctors.push(doctorName);
+                    saveDoctors(doctors);
+                    populateDoctorList();
+                }
+                customDoctorInput.value = '';
+            }
+        }
+
+        function removeDoctor() {
+            const select = document.getElementById('referredBy');
+            const selectedDoctor = select.value;
+            if (selectedDoctor) {
+                let doctors = loadDoctors();
+                doctors = doctors.filter(doctor => doctor !== selectedDoctor);
+                saveDoctors(doctors);
+                populateDoctorList();
+            }
+        }
+
+        function hideRow(button) {
+            const row = button.closest('tr');
+
+            // Clear all input fields in the row
+            row.querySelectorAll('input, select').forEach(input => {
+                input.value = '';
+            });
+
+            // Hide the row
+            row.classList.add('hidden');
+
+            // Adjust currentRowIndex if needed
+            if (currentRowIndex > 0) {
+                currentRowIndex--;
+            }
+        }
+
+        function showDropdown(input) {
+            const dropdownContent = input.nextElementSibling;
+            dropdownContent.style.display = 'block';
+        }
+
+        function filterTests(input) {
+            const filter = input.value.toLowerCase();
+            const dropdownContent = input.nextElementSibling;
+            const options = dropdownContent.querySelectorAll('select option');
+            options.forEach(option => {
+                if (option.textContent.toLowerCase().includes(filter)) {
+                    option.style.display = 'block';
+                } else {
+                    option.style.display = 'none';
+                }
+            });
+        }
+
+        function selectTest(select) {
+            const input = select.parentElement.previousElementSibling;
+            input.value = select.value;
+
+            // Update Unit of Value and Reference Value based on selected test
+            const unit = select.options[select.selectedIndex].getAttribute('data-unit');
+            const reference = select.options[select.selectedIndex].getAttribute('data-reference');
+            const row = select.closest('tr');
+            row.querySelector('input[name="entry.1526332017"]').value = unit;
+            row.querySelector('input[name="entry.1582360212"]').value = reference;
+
+            select.parentElement.style.display = 'none';
+        }
+
+        function handleChange(input) {
+            const dropdownContent = input.nextElementSibling;
+            dropdownContent.style.display = 'none';
+        }
+
+        function unhideRow() {
+            const rows = document.querySelectorAll('#testTable tbody tr');
+            while (currentRowIndex < rows.length && !rows[currentRowIndex].classList.contains('hidden')) {
+                currentRowIndex++;
+            }
+            if (currentRowIndex < rows.length) {
+                rows[currentRowIndex].classList.remove('hidden');
+                currentRowIndex++;
+            }
+        }
+ 
+        // Initialize form with doctors
+        populateDoctorList();
+    </script>
+</body>
+</html>
